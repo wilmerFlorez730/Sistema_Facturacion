@@ -311,7 +311,7 @@
       facturasPorMes = {};
 
       try {
-        const response = await fetch(`http://localhost:3000/api/facturas/${nombreUsuario}`);
+        const response = await fetch(`/api/facturas/${nombreUsuario}`);
         facturas = await response.json();
 
         if (response.ok) {
