@@ -1,11 +1,11 @@
 {
   "version": 2,
   "builds": [
-    { "src": "Backend/server.js", "use": "@vercel/node" },
-    { "src": "Frontend/**", "use": "@vercel/static" }
+    { "src": "Sistema_De_Facturas/Backend/server.js", "use": "@vercel/node" },
+    { "src": "Sistema_De_Facturas/Frontend/**/*", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "Backend/server.js" },
-    { "src": "/(.*)", "dest": "Frontend/$1" }
+    { "src": "/api/(.*)", "dest": "Sistema_De_Facturas/Backend/server.js" },
+    { "src": "/(.*)", "dest": "Sistema_De_Facturas/Frontend/$1" }
   ]
 }
