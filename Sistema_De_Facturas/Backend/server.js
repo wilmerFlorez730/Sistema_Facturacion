@@ -3,15 +3,12 @@ const express = require('express');
 const pool = require('./db'); // Configuración de la base de datos
 const facturasRoutes = require('./routes');
 const path = require('path');
-
-
 const app = express();
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.use(express.static(path.join(__dirname, '../Frontend')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/index.html'));
 });
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 const cors = require('cors');
 app.use(cors({ origin: '*' }));
