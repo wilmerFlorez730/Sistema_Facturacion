@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Factura</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary-color: #64748b;
+      --accent-color: #7c3aed;
+      --background-color: #f8fafc;
+      --surface-color: #ffffff;
+      --text-color: #1e293b;
+      --border-color: #e2e8f0;
+      --success-color: #10b981;
+      --error-color: #ef4444;
+      --readonly-bg: #f1f5f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      margin: 1rem auto;
+      border-radius: 2px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--surface-color);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary-color);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    label i {
+      margin-right: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      padding-left: 2.5rem;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background-color: var(--surface-color);
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 1rem;
+      top: 2.3rem;
+      color: var(--secondary-color);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    input:read-only {
+      background-color: var(--readonly-bg);
+      border-color: var(--border-color);
+      cursor: not-allowed;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-back {
+      display: block;
+      max-width: 200px;
+      margin: 1rem auto;
+      padding: 0.75rem;
+      background-color: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-back:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .message {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .error {
+      background-color: #fee2e2;
+      color: var(--error-color);
+    }
+
+    .success {
+      background-color: #d1fae5;
+      color: var(--success-color);
+    }
+
+    .loading {
+      background-color: #dbeafe;
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      form {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Crear Factura</h1>
+  <a href="index.html" class="button-back">&larr; Regresar</a>
+  <form id="form-factura">
+    <div class="form-group">
+      <label for="nombre_usuario">
+        Nombre Usuario
+      </label>
+      <i class="fas fa-user"></i>
+      <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="Ingresa el nombre del usuario" required />
+    </div>
+
+    <div class="form-group">
+      <label for="fecha_creacion">
+        Fecha
+      </label>
+      <i class="fas fa-calendar"></i>
+      <input type="datetime-local" id="fecha_creacion" name="fecha_creacion" />
+    </div>
+
+    <div class="form-group">
+      <label for="nombre_cultivo">
+        Cultivo
+      </label>
+      <i class="fas fa-seedling"></i>
+      <input type="text" id="nombre_cultivo" name="nombre_cultivo" value="Fresa" readonly required />
+    </div>
+
+    <div class="form-group">
+      <label for="kilos_pareja">
+        Kilos Pareja
+      </label>
+      <i class="fas fa-weight-hanging"></i>
+      <input type="number" step="1" id="kilos_pareja" name="kilos_pareja" placeholder="Ej: 10" min="0" required />
+    </div>
+
+    <div class="form-group">
+      <label for="precio_pareja">
+        Precio Pareja
+      </label>
+      <i class="fas fa-dollar-sign"></i>
+      <input type="number" step="1" id="precio_pareja" name="precio_pareja" placeholder="Ej: 100" min="0" required />
+    </div>
+
+    <div class="form-group">
+      <label for="kilos_gruesa">
+        Kilos Gruesa
+      </label>
+      <i class="fas fa-weight-hanging"></i>
+      <input type="number" step="1" id="kilos_gruesa" name="kilos_gruesa" placeholder="Ej: 5" min="0" required />
+    </div>
+
+    <div class="form-group">
+      <label for="precio_gruesa">
+        Precio Gruesa
+      </label>
+      <i class="fas fa-dollar-sign"></i>
+      <input type="number" step="1" id="precio_gruesa" name="precio_gruesa" placeholder="Ej: 80" min="0" required />
+    </div>
+
+    <div class="form-group">
+      <label for="kilos_millo">
+        Kilos Millo
+      </label>
+      <i class="fas fa-weight-hanging"></i>
+      <input type="number" step="1" id="kilos_millo" name="kilos_millo" placeholder="Ej: 20" min="0" required />
+    </div>
+
+    <div class="form-group">
+      <label for="precio_millo">
+        Precio Millo
+      </label>
+      <i class="fas fa-dollar-sign"></i>
+      <input type="number" step="1" id="precio_millo" name="precio_millo" placeholder="Ej: 60" min="0" required />
+    </div>
+
+    <button type="submit" id="submit-button">
+      <i class="fas fa-file-invoice"></i>
+      Crear Factura
+    </button>
+    <div id="message"></div>
+  </form>
+
+  <script>
+    document.getElementById('form-factura').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const messageElement = document.getElementById('message');
+      const submitButton = document.getElementById('submit-button');
+
+      const formData = {
+        nombre_usuario: document.getElementById('nombre_usuario').value.trim(),
+        nombre_cultivo: document.getElementById('nombre_cultivo').value.trim(),
+        kilos_pareja: Math.round(parseFloat(document.getElementById('kilos_pareja').value)),
+        precio_pareja: Math.round(parseFloat(document.getElementById('precio_pareja').value)),
+        kilos_gruesa: Math.round(parseFloat(document.getElementById('kilos_gruesa').value)),
+        precio_gruesa: Math.round(parseFloat(document.getElementById('precio_gruesa').value)),
+        kilos_millo: Math.round(parseFloat(document.getElementById('kilos_millo').value)),
+        precio_millo: Math.round(parseFloat(document.getElementById('precio_millo').value)),
+        fecha_creacion: document.getElementById('fecha_creacion').value || null,
+      };
+
+      try {
+        messageElement.className = 'message loading';
+        messageElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creando factura, por favor espera...';
+        submitButton.disabled = true;
+
+        const response = await fetch('http://localhost:3000/api/facturas/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          messageElement.className = 'message success';
+          messageElement.innerHTML = '<i class="fas fa-check-circle"></i> ¡Factura creada exitosamente!';
+          document.getElementById('form-factura').reset();
+        } else {
+          throw new Error(result.error || 'Error al crear la factura');
+        }
+      } catch (error) {
+        messageElement.className = 'message error';
+        messageElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message}`;
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

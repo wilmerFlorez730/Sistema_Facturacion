@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión de Facturas Alto Grande</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary-color: #64748b;
+      --accent-color: #7c3aed;
+      --background-color: #f8fafc;
+      --surface-color: #ffffff;
+      --text-color: #1e293b;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .description {
+      color: var(--secondary-color);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 2rem auto;
+      position: relative;
+    }
+
+    .search-container i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--secondary-color);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 2.5rem;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--surface-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      width: 300px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+
+    .card-description {
+      color: var(--secondary-color);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-link {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .card-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Sistema de Gestión de Facturas Alto Grande </h1>
+      <p class="description">
+        Accede a todas las funcionalidades del sistema de facturación de manera rápida y sencilla.
+      </p>
+    </header>
+
+    <div class="search-container">
+      <i class="fas fa-search"></i>
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Buscar funcionalidad..." 
+        id="search-input"
+      >
+    </div>
+
+    <div class="grid">
+      <div class="card" data-search="consultar facturas buscar ver">
+        <div class="card-header">
+          <i class="fas fa-search card-icon"></i>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Consultar Facturas</h3>
+          <p class="card-description">
+            Busca y visualiza facturas por usuario y período de tiempo.
+          </p>
+          <a href="ver_factura.html" class="card-link">
+            <i class="fas fa-arrow-right"></i> Acceder
+          </a>
+        </div>
+      </div>
+
+      <div class="card" data-search="crear nueva factura generar">
+        <div class="card-header">
+          <i class="fas fa-file-invoice card-icon"></i>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Crear Factura</h3>
+          <p class="card-description">
+            Genera nuevas facturas con información detallada de cultivos.
+          </p>
+          <a href="crear_factura.html" class="card-link">
+            <i class="fas fa-arrow-right"></i> Acceder
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const searchData = card.getAttribute('data-search').toLowerCase();
+        const visible = searchData.includes(searchTerm);
+        card.style.display = visible ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
